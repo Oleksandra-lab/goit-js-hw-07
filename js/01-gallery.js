@@ -14,5 +14,28 @@ function createGalleryMarkup(galleryItems){
 
 }
 
+galleryContainer.addEventListener("click", onImageClick);
+function onImageClick(evt){
+    evt.preventDefault();
+    if(evt.target.nodeName !== "IMG"){
+        return
+    }
+    const instance = basicLightbox.create(`
+    <img src="${evt.target.dataset.source}" width="800" height="600">
+    `)
+
+    instance.show();
+
+    galleryContainer.addEventListener("keydown", (evt) => {
+        if(evt.code === "Escape"){
+            instance.close();
+        }
+    })
+
+}
+
+
+
+
 
 console.log(galleryItems);
